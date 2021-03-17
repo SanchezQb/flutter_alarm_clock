@@ -29,7 +29,7 @@ class _ClockPageState extends State<ClockPage> {
               color: Colors.blue.withOpacity(0.1),
               spreadRadius: 2,
               blurRadius: 15,
-              offset: const Offset(0, 3), // changes position of shadow
+              offset: const Offset(0, 3),
             ),
           ],
         ),
@@ -62,12 +62,6 @@ class ClockPainter extends CustomPainter {
       ..strokeWidth = 3
       ..style = PaintingStyle.stroke
       ..color = Colors.red;
-
-    // final tickPaint = Paint()
-    //   ..color = Colors.grey
-    //   ..style = PaintingStyle.stroke
-    //   ..strokeCap = StrokeCap.round
-    //   ..strokeWidth = 1;
 
     final secondHandPaint = Paint()
       ..style = PaintingStyle.stroke
@@ -108,22 +102,10 @@ class ClockPainter extends CustomPainter {
 
     canvas.drawCircle(center, 5, centerDotPainter);
     canvas.drawCircle(center, 5, centerOutlinePainter);
-
-    // final outerCircleRadius = radius;
-    // final innerCircleRadius = radius - 10;
-    // for (double i = 0; i < 360; i += 12) {
-    //   final x1 = centerX + (outerCircleRadius - 25) * cos(i * pi / 180);
-    //   final y1 = centerX + (outerCircleRadius - 25) * sin(i * pi / 180);
-
-    //   final x2 = centerX + innerCircleRadius * cos(i * pi / 180);
-    //   final y2 = centerX + innerCircleRadius * sin(i * pi / 180);
-    //   canvas.drawLine(Offset(x1, y1), Offset(x2, y2), tickPaint);
-    // }
   }
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    // TODO: implement shouldRepaint
     return true;
   }
 }
