@@ -1,6 +1,6 @@
 import 'package:clock_app/application/ui/alarm/data/alarms.dart';
-import 'package:clock_app/application/ui/alarm/widgets/frosted_glass_box.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class AlarmPage extends StatelessWidget {
   @override
@@ -23,32 +23,28 @@ class AlarmPage extends StatelessWidget {
           Expanded(
             child: ListView(
               children: alarms.map((alarm) {
+                final alarmDate =
+                    DateFormat('EEE, d MMM').format(alarm.alarmDateTime);
+                final alarmTime =
+                    DateFormat('HH:mm').format(alarm.alarmDateTime);
                 return Container(
                   padding: const EdgeInsets.all(20.0),
                   margin: const EdgeInsets.only(bottom: 10.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20.0),
-                    // gradient: const LinearGradient(
-                    //   begin: Alignment.topLeft,
-                    //   end: Alignment.bottomRight,
-                    //   colors: [
-                    //     Colors.orange,
-                    //     Colors.orangeAccent,
-                    //   ],
-                    // ),
                     color: Colors.orange[300],
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "1:00AM",
+                        alarmTime,
                         style: Theme.of(context).textTheme.headline5,
                       ),
                       Row(
                         children: [
                           Text(
-                            "1:00AM",
+                            alarmDate,
                             style: Theme.of(context).textTheme.bodyText2,
                           ),
                           const SizedBox(width: 5),
