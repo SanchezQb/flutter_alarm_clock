@@ -1,6 +1,6 @@
+import 'package:clock_app/application/ui/alarm/pages/alarm_page.dart';
 import 'package:clock_app/application/ui/clock/pages/clock_page.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -8,9 +8,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  static final currentDate = DateTime.now();
-  final date = DateFormat('EEE, d MMM').format(currentDate);
-  final time = DateFormat('HH:mm').format(currentDate);
+  int _currentIndex = 0;
+
+  final List<Widget> _pages = [
+    ClockPage(),
+    AlarmPage(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,33 +22,37 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.white,
         elevation: 0,
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Center(child: ClockPage()),
-          ),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  time,
-                  style: Theme.of(context).textTheme.headline3.copyWith(
-                        color: Colors.black,
-                      ),
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  date,
-                  style: Theme.of(context).textTheme.headline5.copyWith(
-                        color: Colors.black,
-                      ),
-                ),
-              ],
-            ),
-          ),
-        ],
+      body: _pages[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        items: tabItems(),
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        unselectedItemColor: Colors.black,
+        selectedItemColor: Colors.orange,
+        elevation: 0,
+        backgroundColor: Colors.white,
       ),
     );
+  }
+
+  List<BottomNavigationBarItem> tabItems() {
+    return <BottomNavigationBarItem>[
+      const BottomNavigationBarItem(
+        icon: Icon(Icons.watch_sharp),
+        label: 'Clock',
+      ),
+      const BottomNavigationBarItem(
+        icon: Icon(
+          Icons.alarm,
+          size: 28,
+        ),
+        label: 'Alarm',
+      ),
+    ];
   }
 }

@@ -1,111 +1,41 @@
-import 'dart:async';
-import 'dart:math';
-
+import 'package:clock_app/application/ui/clock/widgets/clock_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-class ClockPage extends StatefulWidget {
-  @override
-  _ClockPageState createState() => _ClockPageState();
-}
-
-class _ClockPageState extends State<ClockPage> {
-  @override
-  void initState() {
-    super.initState();
-    Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {});
-    });
-  }
-
+class ClockPage extends StatelessWidget {
+  static final currentDate = DateTime.now();
+  final date = DateFormat('EEE, d MMM').format(currentDate);
+  final time = DateFormat('HH:mm').format(currentDate);
   @override
   Widget build(BuildContext context) {
-    return Container(
-        width: 300,
-        height: 300,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.blue.withOpacity(0.1),
-              spreadRadius: 2,
-              blurRadius: 15,
-              offset: const Offset(0, 3),
-            ),
-          ],
+    return Column(
+      children: [
+        Expanded(
+          child: Center(child: ClockWidget()),
         ),
-        child: Transform.rotate(
-          angle: -pi / 2,
-          child: CustomPaint(
-            painter: ClockPainter(),
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                time,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline3
+                    .copyWith(color: Colors.black, fontWeight: FontWeight.w500),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                date,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline5
+                    .copyWith(color: Colors.black),
+              ),
+            ],
           ),
-        ));
-  }
-}
-
-class ClockPainter extends CustomPainter {
-  final currentDate = DateTime.now();
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final centerX = size.width / 2;
-    final centerY = size.height / 2;
-    final center = Offset(centerX, centerY);
-    final radius = min(centerX, centerY);
-
-    final fillCirclePaint = Paint()..color = Colors.white;
-    final outlineCirclePaint = Paint()
-      ..strokeWidth = 16
-      ..style = PaintingStyle.stroke
-      ..color = Colors.white;
-    final centerDotPainter = Paint()..color = Colors.white;
-    final centerOutlinePainter = Paint()
-      ..strokeWidth = 3
-      ..style = PaintingStyle.stroke
-      ..color = Colors.red;
-
-    final secondHandPaint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 5
-      ..strokeCap = StrokeCap.round
-      ..color = Colors.red;
-
-    final minuteHandPaint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 5
-      ..strokeCap = StrokeCap.round
-      ..color = Colors.black;
-
-    final hourHandPaint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 5
-      ..strokeCap = StrokeCap.round
-      ..color = Colors.black;
-
-    canvas.drawCircle(center, radius - 20, fillCirclePaint);
-    canvas.drawCircle(center, radius - 20, outlineCirclePaint);
-
-    final secondHandX = centerX + 80 * cos(currentDate.second * 6 * pi / 180);
-    final secondHandY = centerX + 80 * sin(currentDate.second * 6 * pi / 180);
-
-    canvas.drawLine(center, Offset(secondHandX, secondHandY), secondHandPaint);
-
-    final minuteHandX = centerX + 80 * cos(currentDate.minute * 6 * pi / 180);
-    final minuteHandY = centerX + 80 * sin(currentDate.minute * 6 * pi / 180);
-
-    canvas.drawLine(center, Offset(minuteHandX, minuteHandY), minuteHandPaint);
-
-    final hourHandX = centerX +
-        60 * cos((currentDate.hour * 30 + currentDate.minute * .5) * pi / 180);
-    final hourHandY = centerX +
-        60 * sin((currentDate.hour * 30 + currentDate.minute * .5) * pi / 180);
-    canvas.drawLine(center, Offset(hourHandX, hourHandY), hourHandPaint);
-
-    canvas.drawCircle(center, 5, centerDotPainter);
-    canvas.drawCircle(center, 5, centerOutlinePainter);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
+        ),
+      ],
+    );
   }
 }
