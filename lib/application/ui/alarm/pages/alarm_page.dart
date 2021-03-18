@@ -63,7 +63,7 @@ class AlarmPage extends StatelessWidget {
                           Switch(
                             value: true,
                             onChanged: (val) {
-                              print(val);
+                              debugPrint("$val");
                             },
                             activeColor: const Color(0xFFfbe6c2),
                           )

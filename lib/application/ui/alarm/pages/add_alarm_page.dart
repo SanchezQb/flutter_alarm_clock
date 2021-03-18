@@ -8,11 +8,11 @@ class AddAlarmPage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 10),
           child: Column(
-            children: [
-              const Expanded(
+            children: const [
+              Expanded(
                 child: SizedBox(),
               ),
-              const Expanded(
+              Expanded(
                 child: SizedBox(),
               )
             ],
