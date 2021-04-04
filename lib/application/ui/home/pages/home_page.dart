@@ -1,5 +1,6 @@
 import 'package:clock_app/application/ui/alarm/pages/alarm_page.dart';
 import 'package:clock_app/application/ui/clock/pages/clock_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,7 +18,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      // appBar: AppBar(
+      //   elevation: 0,
+      // ),
       body: SafeArea(child: _pages[_currentIndex]),
       bottomNavigationBar: BottomNavigationBar(
         items: tabItems(),
@@ -28,10 +31,9 @@ class _HomePageState extends State<HomePage> {
             _currentIndex = index;
           });
         },
-        unselectedItemColor: Colors.black,
+        // unselectedItemColor: Colors.black,
         selectedItemColor: Colors.orange,
         elevation: 0,
-        backgroundColor: Colors.white,
       ),
     );
   }
@@ -39,12 +41,15 @@ class _HomePageState extends State<HomePage> {
   List<BottomNavigationBarItem> tabItems() {
     return <BottomNavigationBarItem>[
       const BottomNavigationBarItem(
-        icon: Icon(Icons.watch_sharp),
+        icon: Icon(
+          CupertinoIcons.clock,
+          size: 28,
+        ),
         label: 'Clock',
       ),
       const BottomNavigationBarItem(
         icon: Icon(
-          Icons.alarm,
+          CupertinoIcons.alarm,
           size: 28,
         ),
         label: 'Alarm',
