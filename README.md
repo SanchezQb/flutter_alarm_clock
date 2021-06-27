@@ -4,7 +4,7 @@ Clock UI using CustomPaint
 
 ## 📸 ScreenShots
 
-| List of Currencies | Currency Details |
+| Dark | Light |
 |------|-------|
 |<img src="screenshots/dark.png" width="300">|<img src="screenshots/light.png" width="300">|
 
