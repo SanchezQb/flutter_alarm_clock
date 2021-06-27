@@ -10,7 +10,7 @@ class ClockPage extends StatefulWidget {
 }
 
 class _ClockPageState extends State<ClockPage> {
-  Timer timer;
+  late Timer timer;
   @override
   void initState() {
     super.initState();
@@ -44,7 +44,7 @@ class _ClockPageState extends State<ClockPage> {
                 time,
                 style: Theme.of(context)
                     .textTheme
-                    .headline3
+                    .headline3!
                     .copyWith(fontWeight: FontWeight.w500),
               ),
               const SizedBox(height: 20),

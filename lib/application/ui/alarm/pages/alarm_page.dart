@@ -19,7 +19,7 @@ class AlarmPage extends StatelessWidget {
                 'Alarm',
                 style: Theme.of(context)
                     .textTheme
-                    .headline5
+                    .headline5!
                     .copyWith(fontWeight: FontWeight.w500),
               ),
               IconButton(
@@ -36,8 +36,8 @@ class AlarmPage extends StatelessWidget {
           Expanded(
             child: ListView(
               children: alarms.map((alarm) {
-                final alarmDate =
-                    DateFormat('EEE, d MMM').format(alarm.alarmDateTime);
+                // final alarmDate =
+                //     DateFormat('EEE, d MMM').format(alarm.alarmDateTime);
                 final alarmTime =
                     DateFormat('HH:mm').format(alarm.alarmDateTime);
                 return Container(
